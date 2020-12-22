@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const items = [
   {
@@ -123,10 +124,11 @@ const items = [
   },
 ];
 
-const VerticalTopMenu = () => {
+const TopMenu = () => {
+  const router = useRouter();
   return (
-    <div className={`flex flex-col space-y-8 items-center p-4`}>
-      <a href="/" title="Intercom">
+    <div className={`flex flex-col items-center pt-4`}>
+      <a href="/" className="pb-8" title="Intercom">
         <svg
           className="h-8 w-8"
           xmlns="http://www.w3.org/2000/svg"
@@ -137,11 +139,11 @@ const VerticalTopMenu = () => {
         </svg>
       </a>
       {items.map((i) => (
-        <Link href={i.route}>
+        <Link key={i.name} href={i.route}>
           <a
-            className="focus:outline-none"
+            className={`focus:outline-none p-4 
+            ${router.pathname === i.route ? "bg-blueGray-200" : ""}`}
             title={i.name}
-            key={i.name}
             aria-label={i.name}
           >
             {i.icon}
@@ -154,8 +156,8 @@ const VerticalTopMenu = () => {
 
 export default function Sidebar() {
   return (
-    <div className="w-16 flex flex-col bg-gray-200 justify-between border border-r-2 border-gray-300">
-      <VerticalTopMenu margin="mt-4" />
+    <div className="w-16 flex flex-col bg-gray-100 justify-between shadow-md">
+      <TopMenu />
     </div>
   );
 }
