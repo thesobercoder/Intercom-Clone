@@ -1,4 +1,6 @@
-const TopMenuItems = [
+import Link from "next/link";
+
+const items = [
   {
     icon: (
       <svg
@@ -17,6 +19,7 @@ const TopMenuItems = [
       </svg>
     ),
     name: "Inbox",
+    route: "/",
   },
   {
     icon: (
@@ -36,6 +39,7 @@ const TopMenuItems = [
       </svg>
     ),
     name: "Archive",
+    route: "/archive",
   },
   {
     icon: (
@@ -55,6 +59,7 @@ const TopMenuItems = [
       </svg>
     ),
     name: "Users",
+    route: "/users",
   },
   {
     icon: (
@@ -74,6 +79,7 @@ const TopMenuItems = [
       </svg>
     ),
     name: "Bookmark",
+    route: "/bookmark",
   },
   {
     icon: (
@@ -93,6 +99,7 @@ const TopMenuItems = [
       </svg>
     ),
     name: "Operator",
+    route: "/operator",
   },
   {
     icon: (
@@ -112,9 +119,43 @@ const TopMenuItems = [
       </svg>
     ),
     name: "Analytics",
+    route: "/analytics",
   },
 ];
 
-export default {
-  TopMenuItems,
+const VerticalTopMenu = () => {
+  return (
+    <div className={`flex flex-col space-y-8 items-center p-4`}>
+      <a href="/" title="Intercom">
+        <svg
+          className="h-8 w-8"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+        </svg>
+      </a>
+      {items.map((i) => (
+        <Link href={i.route}>
+          <a
+            className="focus:outline-none"
+            title={i.name}
+            key={i.name}
+            aria-label={i.name}
+          >
+            {i.icon}
+          </a>
+        </Link>
+      ))}
+    </div>
+  );
 };
+
+export default function Sidebar() {
+  return (
+    <div className="w-16 flex flex-col bg-gray-200 justify-between border border-r-2 border-gray-300">
+      <VerticalTopMenu margin="mt-4" />
+    </div>
+  );
+}
