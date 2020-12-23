@@ -3,7 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import faker from "faker";
 import Bubble from "../components/bubble";
-import { LocationMarker, OfficeBuilding } from "../components/svg";
+import {
+  LocationMarker,
+  OfficeBuilding,
+  DotsVertical,
+  ChevronRight,
+} from "../components/svg";
 
 const Accordion = (props) => {
   return (
@@ -339,21 +344,8 @@ const InfoPane = (props) => {
                 SB
               </Bubble>
             </div>
-            <button className="">
-              <svg
-                className="h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                />
-              </svg>
+            <button className="absolute right-0 focus:outline-none">
+              <DotsVertical className="h-6 w-6" />
             </button>
           </div>
           <h1 className="text-lg font-extrabold text-gray-500 mx-auto my-2">
@@ -363,15 +355,20 @@ const InfoPane = (props) => {
             User
           </div>
           <span className="mt-6 text-sm text-gray-500 flex items-center space-x-2">
-            <LocationMarker className="h-6 w-6" />
+            <LocationMarker className="h-4 w-4" />
             <span>3:42 PM in Dublin, Ireland</span>
           </span>
-          <span className="mt-1 text-sm text-gray-500 flex items-center  space-x-2">
-            <OfficeBuilding className="h-6 w-6" />
+          <span className="mt-1 text-sm text-gray-500 flex items-center space-x-2">
+            <OfficeBuilding className="h-4 w-4" />
             <span>Writer's Central</span>
           </span>
         </div>
-        <div className="flex-grow">Hello</div>
+        <div className="flex flex-row justify-between items-center p-4 border-b border-gray-300">
+          <span className="font-bold text-sm">Qualification</span>
+          <span className="text-gray-300 text-sm">11/12 Complete</span>
+          <ChevronRight className="h-4 w-4" />
+        </div>
+        <div className="flex-grow">Test</div>
       </div>
     </>
   );
