@@ -159,7 +159,7 @@ const TopMenu = () => {
 
 export default function Sidebar() {
   return (
-    <div className="w-16 flex-none flex flex-col bg-gray-100 justify-between border-r-2 border-gray-200 text-gray-600">
+    <div className="w-16 flex-none flex flex-col bg-gray-100 justify-between border-r-2 border-gray-200 text-gray-500">
       <TopMenu />
     </div>
   );

@@ -1,6 +1,6 @@
 export default function Submenu(props) {
   return (
-    <div className="w-64 flex-none bg-gray-100 p-4 text-gray-600">
+    <div className="w-64 flex-none bg-gray-100 p-4 text-gray-500">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-2xl font-semibold">{props.name}</h1>
         <svg

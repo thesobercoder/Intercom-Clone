@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import faker from "faker";
 import Bubble from "../components/bubble";
+import { LocationMarker, OfficeBuilding } from "../components/svg";
 
 const Accordion = (props) => {
   return (
@@ -328,7 +329,52 @@ const ChatPane = (props) => {
 };
 
 const InfoPane = (props) => {
-  return <div className="w-1/5 bg-gray-200">Right</div>;
+  return (
+    <>
+      <div className="w-1/5 flex flex-col flex-none">
+        <div className="p-4 flex flex-col flex-none border-b border-gray-300">
+          <div className="flex items-start">
+            <div className="mx-auto">
+              <Bubble size="h-16 w-16" text="text-2xl">
+                SB
+              </Bubble>
+            </div>
+            <button className="">
+              <svg
+                className="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                />
+              </svg>
+            </button>
+          </div>
+          <h1 className="text-lg font-extrabold text-gray-500 mx-auto my-2">
+            Elizabeth McGuane
+          </h1>
+          <div className="text-gray-400 border-blueGray-400 mx-auto text-xs border rounded-2xl px-3 py-1 mb-2 uppercase">
+            User
+          </div>
+          <span className="mt-6 text-sm text-gray-500 flex items-center space-x-2">
+            <LocationMarker className="h-6 w-6" />
+            <span>3:42 PM in Dublin, Ireland</span>
+          </span>
+          <span className="mt-1 text-sm text-gray-500 flex items-center  space-x-2">
+            <OfficeBuilding className="h-6 w-6" />
+            <span>Writer's Central</span>
+          </span>
+        </div>
+        <div className="flex-grow">Hello</div>
+      </div>
+    </>
+  );
 };
 
 export default function Home() {
@@ -472,11 +518,7 @@ export default function Home() {
   );
 
   return (
-    <Viewport
-      name="Inbox"
-      className="flex flex-row text-gray-600"
-      submenu={submenu}
-    >
+    <Viewport name="Inbox" className="flex flex-row" submenu={submenu}>
       <MessagePane chats={chats} />
       <ChatPane chats={chats} />
       <InfoPane />
