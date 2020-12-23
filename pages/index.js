@@ -62,6 +62,156 @@ const Accordion = (props) => {
   );
 };
 
+const MessagePane = (props) => {
+  return (
+    <div className="w-1/4 flex-none flex flex-col">
+      <div className="flex flex-row space-x-4 items-center p-4 flex-none">
+        <button className="focus:outline-none">
+          <svg
+            className="w-4 h-4 flex-none"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <h1 className="text-2xl font-semibold">You</h1>
+      </div>
+      <div className="mt-4 flex justify-between border-t border-b text-gray-500 border-gray-300 p-4 shadow-md flex-none">
+        <button className="flex flex-row items-center space-x-2 font-semibold">
+          <svg
+            className="h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+            />
+          </svg>
+          <h3>Open</h3>
+          <svg
+            className="h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        <button className="flex flex-row items-center space-x-2 font-semibold">
+          <h3>Newest</h3>
+          <svg
+            className="h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="flex-auto overflow-y-auto">
+        {props.chats.map((x, i) => (
+          <a
+            key={i}
+            className="flex flex-col cursor-pointer border-b border-gray-300 hover:bg-blue-200"
+          >
+            <div
+              className={`flex flex-col space-y-4 p-4 border-l-4
+                 ${i === 0 ? " border-blue-500" : "border-transparent"}`}
+            >
+              <div className="flex-none flex flex-row space-x-2 items-center">
+                <div className="font-semibold text-sm text-white rounded-full bg-blue-400 flex items-center justify-center h-8 w-8">
+                  {x.initials}
+                </div>
+                <strong className="flex-grow text-sm">{x.name}</strong>
+                <div className="flex-none">{x.lastSentTime}</div>
+              </div>
+              <div className="flex-grow flex flex-row items-center space-x-2">
+                <p className="truncate-2-lines">{x.lastSent}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ChatPane = (props) => {
+  return (
+    <div className="w-3/5 border-l border-r border-gray-300 flex flex-col">
+      <div className="flex flex-row space-x-4 justify-between items-center pl-4 pr-4 pt-4 pb-8 flex-none border-b border-gray-300">
+        <h1 className="text-2xl font-semibold">{props.chats[0].name}</h1>
+        <div className="flex-none flex flex-row space-x-2 items-center">
+          <button className="focus:outline-none">
+            <svg
+              className="w-4 h-4 flex-none"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
+          <button className="focus:outline-none">
+            <svg
+              className="w-4 h-4 flex-none"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div className="flex-grow">Chat holder</div>
+      <div className="flex-none h-1/5 border-t border-gray-300">Reply Area</div>
+    </div>
+  );
+};
+
+const InfoPane = (props) => {
+  return <div className="w-1/5 bg-gray-200">Right</div>;
+};
+
 export default function Home() {
   const items = [
     {
@@ -146,7 +296,7 @@ export default function Home() {
     },
   ];
 
-  const chats = [...Array(1000)].map((x) => {
+  const chats = [...Array(50)].map(() => {
     const fname = faker.name.firstName();
     const lname = faker.name.lastName();
     const name = `${fname} ${lname}`;
@@ -187,105 +337,14 @@ export default function Home() {
   );
 
   return (
-    <Viewport name="Inbox" className="flex flex-row" submenu={submenu}>
-      <div className="w-1/5 flex-none flex flex-col">
-        <div className="flex flex-row space-x-4 items-center p-4 flex-none">
-          <button className="focus:outline-none">
-            <svg
-              className="w-4 h-4 flex-none"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-          <h1 className="text-2xl font-semibold">You</h1>
-        </div>
-        <div className="mt-4 flex justify-between border-t border-b text-gray-500 border-gray-300 p-4 shadow-md flex-none">
-          <button className="flex flex-row items-center space-x-2 font-semibold">
-            <svg
-              className="h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-              />
-            </svg>
-            <h3>Open</h3>
-            <svg
-              className="h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-          <button className="flex flex-row items-center space-x-2 font-semibold">
-            <h3>Newest</h3>
-            <svg
-              className="h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </button>
-        </div>
-        <div className="flex-auto overflow-y-auto">
-          {chats.map((x, i) => (
-            <a
-              key={i}
-              className="flex flex-col cursor-pointer border-b border-gray-300 hover:bg-blue-200"
-            >
-              <div
-                className={`flex flex-col space-y-4 p-4 border-l-2 ${
-                  i === 0 ? "border-blue-500" : ""
-                }`}
-              >
-                <div className="flex-none flex flex-row space-x-2 items-center">
-                  <div className="font-semibold text-sm text-white rounded-full bg-blue-400 flex items-center justify-center h-8 w-8">
-                    {x.initials}
-                  </div>
-                  <strong className="flex-grow text-sm">{x.name}</strong>
-                  <div className="flex-none">{x.lastSentTime}</div>
-                </div>
-                <div className="flex-grow flex flex-row items-center space-x-2">
-                  <p className="truncate-2-lines">{x.lastSent}</p>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-      <div className="w-3/5 border-l border-r border-gray-300">Center</div>
-      <div className="w-1/5 bg-gray-200">Right</div>
+    <Viewport
+      name="Inbox"
+      className="flex flex-row text-gray-600"
+      submenu={submenu}
+    >
+      <MessagePane chats={chats} />
+      <ChatPane chats={chats} />
+      <InfoPane />
     </Viewport>
   );
 }
