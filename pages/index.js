@@ -2,6 +2,7 @@ import Viewport from "../components/viewport";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import faker from "faker";
+import Bubble from "../components/bubble";
 
 const Accordion = (props) => {
   return (
@@ -145,9 +146,7 @@ const MessagePane = (props) => {
                  ${i === 0 ? " border-blue-500" : "border-transparent"}`}
             >
               <div className="flex-none flex flex-row space-x-2 items-center">
-                <div className="font-semibold text-sm text-white rounded-full bg-blue-400 flex items-center justify-center h-8 w-8">
-                  {x.initials}
-                </div>
+                <Bubble>{x.initials}</Bubble>
                 <strong className="flex-grow text-sm">{x.name}</strong>
                 <div className="flex-none">{x.lastSentTime}</div>
               </div>
@@ -202,7 +201,36 @@ const ChatPane = (props) => {
           </button>
         </div>
       </div>
-      <div className="flex-grow">Chat holder</div>
+      <div className="flex-grow flex flex-col items-start overflow-y-auto">
+        {props.chats[0].messages.map((c, i) => {
+          if (i % 2 === 0) {
+            return (
+              <div
+                key={i}
+                className="flex flex-row space-x-2 p-2 self-start flex-none"
+              >
+                <Bubble>{c.one.initials}</Bubble>
+                <p className="bg-blue-100 w-80 break-words p-4 rounded-md">
+                  {c.one.message}
+                </p>
+              </div>
+            );
+          }
+          {
+            return (
+              <div
+                key={i}
+                className="flex flex-row space-x-2 p-2 self-end flex-none"
+              >
+                <p className="bg-green-100 w-80 break-words p-4 rounded-md">
+                  {c.two.message}
+                </p>
+                <Bubble bg="bg-green-400">{c.two.initials}</Bubble>
+              </div>
+            );
+          }
+        })}
+      </div>
       <div className="flex-none h-1/5 border-t text-gray-400 border-gray-300 p-4 flex flex-col">
         <div className="flex flex-row space-x-8  pb-2 flex-none items-center">
           <button className="border-b-2 border-gray-400 pb-2">Reply</button>
@@ -396,6 +424,22 @@ export default function Home() {
       name: name,
       lastSentTime: "5m",
       lastSent: faker.lorem.lines(10),
+      messages: [...Array(50)].map(() => {
+        const fname1 = faker.name.firstName();
+        const lname1 = faker.name.lastName();
+        return {
+          one: {
+            initials: `${fname[0]}${lname[0]}`,
+            message: faker.lorem.sentence(10),
+            sent: faker.time.recent("abbr"),
+          },
+          two: {
+            initials: `${fname1[0]}${lname1[0]}`,
+            message: faker.lorem.sentence(10),
+            sent: faker.time.recent("abbr"),
+          },
+        };
+      }),
     };
   });
 
