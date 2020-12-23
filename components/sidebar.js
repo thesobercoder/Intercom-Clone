@@ -130,7 +130,7 @@ const TopMenu = () => {
     <div className={`flex flex-col items-center pt-4`}>
       <a href="/" className="pb-8" title="Intercom">
         <svg
-          className="h-8 w-8"
+          className="h-8 w-8 text-purple-500"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -142,7 +142,7 @@ const TopMenu = () => {
         <Link key={i.name} href={i.route}>
           <a
             className={`focus:outline-none p-4 
-            ${router.pathname === i.route ? "bg-blueGray-200" : ""}`}
+            ${router.pathname === i.route ? "text-purple-500" : ""}`}
             title={i.name}
             aria-label={i.name}
           >
@@ -156,7 +156,7 @@ const TopMenu = () => {
 
 export default function Sidebar() {
   return (
-    <div className="w-16 flex flex-col bg-gray-100 justify-between shadow-md">
+    <div className="w-16 flex flex-col bg-gray-100 justify-between border-r-2 border-gray-200">
       <TopMenu />
     </div>
   );

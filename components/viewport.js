@@ -7,7 +7,7 @@ export default function Viewport(props) {
       <Sidebar />
       <Submenu name={props.name} children={props.submenu} />
       <div
-        className={`flex-auto bg-white border border-l border-gray-200 shadow-xl ${props.className}`}
+        className={`flex-auto bg-white border-l border-gray-300 shadow-2xl ${props.className}`}
       >
         {props.children}
       </div>
