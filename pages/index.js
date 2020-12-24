@@ -8,6 +8,7 @@ import {
   OfficeBuilding,
   DotsVertical,
   ChevronRight,
+  ChevronDown,
 } from "../components/svg";
 
 const Accordion = (props) => {
@@ -368,7 +369,59 @@ const InfoPane = (props) => {
           <span className="text-gray-300 text-sm">11/12 Complete</span>
           <ChevronRight className="h-4 w-4" />
         </div>
-        <div className="flex-grow">Test</div>
+        <div className="flex flex-row justify-between items-center p-4 border-b border-gray-300">
+          <span className="font-bold text-sm">Last Viewed</span>
+          <span className="text-gray-300 text-sm">../components/card</span>
+          <ChevronRight className="h-4 w-4" />
+        </div>
+        <div className="flex flex-col p-4 border-b space-y-4 border-gray-300">
+          <div className="flex flex-row justify-between items-center">
+            <span className="font-bold text-sm">Details</span>
+            <ChevronDown className="h-4 w-4" />
+          </div>
+          <p className="flex space-x-4 text-sm">
+            <span className="text-gray-400">Email:</span>
+            <span>jeff@aptech.com</span>
+          </p>
+          <p className="flex space-x-4 text-sm">
+            <span className="text-gray-400">Swap ID:</span>
+            <span>102401</span>
+          </p>
+          <p className="flex space-x-4 text-sm">
+            <span className="text-gray-400">Product:</span>
+            <span>All</span>
+          </p>
+          <p className="flex space-x-4 text-sm">
+            <span className="text-gray-400">Lead Score:</span>
+            <span>30</span>
+          </p>
+          <p className="flex space-x-4 text-sm">
+            <span className="text-gray-400">Last Contacted:</span>
+            <span>7d ago</span>
+          </p>
+        </div>
+        <div className="flex flex-col p-4 border-b space-y-4 border-gray-300 overflow-y-auto">
+          <div className="flex flex-row justify-between items-center">
+            <span className="font-bold text-sm">Latest Conversations</span>
+            <ChevronDown className="h-4 w-4" />
+          </div>
+          {[...Array(10)].map(() => {
+            return (
+              <div className="flex flex-col pb-4">
+                <p className="flex flex-row space-x-2 text-sm">
+                  <Bubble text="text-xs" size="h-6 w-6 flex-none">
+                    MS
+                  </Bubble>
+                  <span className="flex-grow">Open with Micheal</span>
+                  <span className="flex-none">10m ago</span>
+                </p>
+                <div className="mt-2 pl-2 truncate border-l-4 border-blue-500">
+                  Hey Elizabeth it was nice seeing you the other day.
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );
