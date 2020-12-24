@@ -407,15 +407,15 @@ const InfoPane = (props) => {
           </div>
           {[...Array(10)].map(() => {
             return (
-              <div className="flex flex-col pb-4">
-                <p className="flex flex-row space-x-2 text-sm">
+              <div className="flex flex-col pb-4 text-sm">
+                <p className="flex flex-row space-x-2">
                   <Bubble text="text-xs" size="h-6 w-6 flex-none">
                     MS
                   </Bubble>
                   <span className="flex-grow">Open with Micheal</span>
                   <span className="flex-none">10m ago</span>
                 </p>
-                <div className="mt-2 pl-2 truncate border-l-4 border-blue-500">
+                <div className="mt-2 py-1 ml-2 pl-2 truncate border-l-4 border-blue-500 text-gray-400">
                   Hey Elizabeth it was nice seeing you the other day.
                 </div>
               </div>
