@@ -9,6 +9,19 @@ import {
   DotsVertical,
   ChevronRight,
   ChevronDown,
+  DocumentText,
+  Bookmark,
+  EmojiHappy,
+  Menu,
+  User,
+  AtSymbol,
+  QuestionMarkCircle,
+  Users,
+  Inbox,
+  Clock,
+  Check,
+  Photograph,
+  PaperClip,
 } from "../components/svg";
 
 const Accordion = (props) => {
@@ -20,50 +33,27 @@ const Accordion = (props) => {
       >
         <h2 className="font-bold">{props.name}</h2>
         {props.open ? (
-          <svg
-            className="w-4 h-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          <ChevronRight className="w-4 h-4" />
         ) : (
-          <svg
-            className="w-4 h-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
+          <ChevronDown className="w-4 h-4" />
         )}
       </button>
       {props.open && (
         <div className="flex flex-col space-y-4">
           {props.items &&
-            props.items.map((i) => (
-              <div
-                key={uuidv4()}
-                className="flex flex-row space-x-2 items-center"
-              >
-                {i.icon}
-                <div className="flex-auto">{i.text}</div>
-                <div className="flex-none">{i.count}</div>
-              </div>
-            ))}
+            props.items.map((i) => {
+              const Icon = i.icon;
+              return (
+                <div
+                  key={uuidv4()}
+                  className="flex flex-row space-x-2 items-center"
+                >
+                  <Icon className="h-5 w-5" />
+                  <div className="flex-auto">{i.text}</div>
+                  <div className="flex-none">{i.count}</div>
+                </div>
+              );
+            })}
         </div>
       )}
     </>
@@ -75,71 +65,19 @@ const MessagePane = (props) => {
     <div className="w-1/4 flex-none flex flex-col">
       <div className="flex flex-row space-x-4 items-center p-4 flex-none">
         <button className="focus:outline-none">
-          <svg
-            className="w-4 h-4 flex-none"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <Menu className="w-4 h-4 flex-none" />
         </button>
         <h1 className="text-2xl font-semibold">You</h1>
       </div>
       <div className="mt-4 flex justify-between border-t border-b text-gray-500 border-gray-300 p-4 shadow-md flex-none">
         <button className="flex flex-row items-center space-x-2 font-semibold">
-          <svg
-            className="h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-            />
-          </svg>
+          <Inbox className="h-4 w-4" />
           <h3>Open</h3>
-          <svg
-            className="h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          <ChevronDown className="h-4 w-4" />
         </button>
         <button className="flex flex-row items-center space-x-2 font-semibold">
           <h3>Newest</h3>
-          <svg
-            className="h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          <ChevronDown className="h-4 w-4" />
         </button>
       </div>
       <div className="flex-auto overflow-y-auto">
@@ -174,37 +112,11 @@ const ChatPane = (props) => {
       <div className="flex flex-row space-x-4 justify-between items-center pl-4 pr-4 pt-4 pb-8 flex-none border-b border-gray-300">
         <h1 className="text-2xl font-semibold">{props.chats[0].name}</h1>
         <div className="flex-none flex flex-row space-x-2 items-center">
-          <button className="focus:outline-none">
-            <svg
-              className="w-4 h-4 flex-none"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          <button className="focus:outline-none flex-none">
+            <Clock className="w-4 h-4" />
           </button>
-          <button className="focus:outline-none">
-            <svg
-              className="w-4 h-4 flex-none"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+          <button className="focus:outline-none flex-none">
+            <Check className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -249,84 +161,19 @@ const ChatPane = (props) => {
         ></textarea>
         <div className="h-1/5 flex-none flex flex-row space-x-4 items-center">
           <button className="focus:outline-none">
-            <svg
-              className="h-4 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
+            <DocumentText className="h-4 w-4" />
           </button>
           <button className="focus:outline-none">
-            <svg
-              className="h-4 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-              />
-            </svg>
+            <Bookmark className="h-4 w-4" />
           </button>
           <button className="focus:outline-none">
-            <svg
-              className="h-4 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <EmojiHappy className="h-4 w-4" />
           </button>
           <button className="focus:outline-none">
-            <svg
-              className="h-4 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
+            <Photograph className="h-4 w-4" />
           </button>
           <button className="focus:outline-none">
-            <svg
-              className="h-4 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-              />
-            </svg>
+            <PaperClip className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -432,82 +279,22 @@ export default function Home() {
     {
       text: "You",
       count: 5,
-      icon: (
-        <svg
-          className="h-5 w-5 flex-none"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-          />
-        </svg>
-      ),
+      icon: User,
     },
     {
       text: "Mentions",
       count: 0,
-      icon: (
-        <svg
-          className="h-5 w-5 flex-none"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-          />
-        </svg>
-      ),
+      icon: AtSymbol,
     },
     {
       text: "Unassigned",
       count: 2497,
-      icon: (
-        <svg
-          className="h-5 w-5 flex-none"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
+      icon: QuestionMarkCircle,
     },
     {
       text: "All",
       count: 5171,
-      icon: (
-        <svg
-          className="h-5 w-5 flex-none"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-          />
-        </svg>
-      ),
+      icon: Users,
     },
   ];
 
